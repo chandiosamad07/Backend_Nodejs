@@ -1,6 +1,15 @@
-const http = require('http')
+const express = require ('express')
+const app = express()
 
-http.createServer((req,res)=>{
-   res.write(JSON.stringify({name:'Abdul Samad',email:'absamadchandio@gmail.com'}));
-   res.end()
-}).listen(5000);
+app.get('',(req,res)=>{
+   res.send('Hello this is  Home page')
+});
+
+app.get('/about',(req,res)=>{
+   res.send('This is about page')
+});
+app.get('/help',(req,res)=>{
+   res.send('This is Help page')
+});
+
+app.listen(5000)
