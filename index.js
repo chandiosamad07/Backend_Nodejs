@@ -11,12 +11,12 @@ const reqFilter=(req,res,next)=>{
    
 }
 
-app.use(reqFilter)
+// app.use(reqFilter)
 app.get('',(req,res)=>{
    res.send('Hello this is  Home page')
 });
 
-app.get('/about',(req,res)=>{
+app.get('/about',reqFilter,(req,res)=>{
    res.send('This is about page')
 });
 app.get('/help',(req,res)=>{
