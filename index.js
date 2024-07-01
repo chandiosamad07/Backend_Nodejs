@@ -1,15 +1,8 @@
 const express = require ('express')
+const reqFilter =require('./middleware')
 const app = express()
 
-const reqFilter=(req,res,next)=>{
-   if(!req.query.age){
-      res.send("please provide age")
-   }
-   else{
-      next()
-   }
-   
-}
+
 
 // app.use(reqFilter)
 app.get('',(req,res)=>{
