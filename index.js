@@ -1,21 +1,24 @@
-const express = require ('express')
-const reqFilter =require('./middleware')
-const app = express()
-const route = express.Router()
+const {MongoClient} = require('mongodb');
+const url ='mongodb://localhost:27017';
+const client = new MongoClient(url);
 
+async function getData(){
+   try {
+   let result = await client.connect();
+   let db= result.db('E-com');
+   let collection = db.collection('Product');
+   let response = await collection.find({}).toArray();
 
-route.use(reqFilter)
-app.get('',(req,res)=>{
-   res.send('Hello this is  Home page')
-});
+   console.log('Fetching data from collection...');
 
-route.get('/about',(req,res)=>{
-   res.send('This is about page')
-});
-route.get('/help',(req,res)=>{
-   res.send('This is Help page')
-});
+   if (response.length > 0) {
+     console.log('Data fetched successfully:', response);
+   } else {
+     console.log('No data found in the collection.');
+   }
+ } catch (error) {
+   console.error('Error:', error);
+ } 
+}
 
-app.use('/',route)
-
-app.listen(5000)
+getData();
