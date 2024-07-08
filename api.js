@@ -30,6 +30,8 @@ app.put("/:name", async (req, res) => {
 app.delete("/:id",async (req,res)=>{
     let data = await dbconnect();
     let result = await data.deleteOne({_id: new mongodb.ObjectId(req.params.id)})
+    console.log(result)
     res.send(result)
+
 })
 app.listen(5000);
