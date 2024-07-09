@@ -21,4 +21,9 @@ app.delete("/delete/:_id", async (req, res) => {
     res.send(result);
   });
 
+  app.put("/update/:_id", async (req, res) => {
+    let result = await Product.updateOne({ _id: req.params._id },{$set:req.body});
+    res.send(result);
+  });
+
 app.listen(5000);
