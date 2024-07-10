@@ -17,13 +17,26 @@ app.get("/list", async (req, res) => {
 });
 
 app.delete("/delete/:_id", async (req, res) => {
-    let result = await Product.deleteOne({ _id: req.params._id });
-    res.send(result);
-  });
+  let result = await Product.deleteOne({ _id: req.params._id });
+  res.send(result);
+});
 
-  app.put("/update/:_id", async (req, res) => {
-    let result = await Product.updateOne({ _id: req.params._id },{$set:req.body});
-    res.send(result);
-  });
+app.put("/update/:_id", async (req, res) => {
+  let result = await Product.updateOne(
+    { _id: req.params._id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
+app.get("/search/:key", async (req, res) => {
+  try {
+    let data = await Product.find({
+      $or: [{ name: { $regex: req.params.key, $options: "i" } }],
+    });
+    res.send(data);
+  } catch (error) {
+    res.status(500).send({ error: "An error occurred while searching for products." });
+  }
+});
 
 app.listen(5000);
