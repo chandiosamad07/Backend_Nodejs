@@ -1,8 +1,20 @@
 const express = require("express");
 require("./config");
 const Product = require("./Product");
+const multer = require("multer");
 const app = express();
 app.use(express.json());
+
+const upload = multer({
+  storage:multer.diskStorage({
+    destination: function(req,file,cb){
+      cb(null,"uploads")
+    },
+    filename:function(req,file,cb){
+      cb(null, file.originalname.split('.')[0] + '-' + Date.now() + '.jpg');
+    }
+  })
+}).single("user_file")
 
 app.post("/create", async (req, res) => {
   let data = new Product(req.body);
@@ -38,5 +50,9 @@ app.get("/search/:key", async (req, res) => {
     res.status(500).send({ error: "An error occurred while searching for products." });
   }
 });
+
+app.post("/upload",upload,(req,res)=>{
+  res.send("file upload")
+})
 
 app.listen(5000);
