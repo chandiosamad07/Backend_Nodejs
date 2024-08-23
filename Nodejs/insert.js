@@ -1,6 +1,4 @@
 const dbconnect = require('./mongodb')
-
-
 const insert = async ()=>{
     let db = await dbconnect()
     let result = db.insertMany([
@@ -12,8 +10,6 @@ const insert = async ()=>{
         }
     ])
     console.log(result);
-
-
 }
 
 insert();
