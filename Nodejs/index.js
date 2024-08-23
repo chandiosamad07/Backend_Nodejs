@@ -3,13 +3,21 @@ const data = require('./data')
 const db = require('./mongodb')
 
 
-async function main(){
+// async function main(){
+//     let result = await db()
+//     let data = await result.find({}).toArray()
+//     console.log(data);
+// }
+
+// main();
+
+async function Getdata(){
     let result = await db()
     let data = await result.find({}).toArray()
-    console.log(data);
+    console.log(data)
 }
 
-main();
+Getdata()
 // const server = http.createServer((req, res) => {
 //     res.statusCode = 200;
 //     res.setHeader('Content-Type', 'text/html'); // Set Content-Type to 'text/html'
