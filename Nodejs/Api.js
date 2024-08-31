@@ -20,6 +20,12 @@ app.post('/',async(req,res)=>{
     res.send(result)
 })
 
+app.put('/',async(req,res)=>{
+    let data = await dbconnect();
+    let result = await data.updateOne({name:req.params.name},{$set: req.body})
+    res.send(result)
+})
+
 app.delete('/:id',async (req,res)=>{
     let data = await dbconnect();
     let result = await data.deleteOne({_id: new mongodb.ObjectId (req.params.id)})
