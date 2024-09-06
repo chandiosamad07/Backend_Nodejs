@@ -5,12 +5,10 @@ const dbconnect = require('./mongodb')
 
 app.use(express.json())
 
-app.get('/',async (req,res)=>{
+app.get('/Getdata',async (req,res)=>{
     let data = await dbconnect();
-    data = await data.find().toArray();
-    console.log(data);
-    res.send(data);
-
+    let result = await data.find().toArray();
+    res.send(result)
 })
 
 app.post('/',async(req,res)=>{
